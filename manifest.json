@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "HDR Blocker",
+  "version": "1.0",
+  "description": "Disables HDR for small images (under 200x200px) by applying a CSS filter.",
+  "action": {
+    "default_popup": "options.html"
+  },
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ]
+}
