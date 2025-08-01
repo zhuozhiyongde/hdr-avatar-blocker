@@ -1,11 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "HDR Blocker",
+  "name": "HDR Avatar Blocker",
   "version": "1.0",
-  "description": "Disables HDR for small images (under 200x200px) by applying a CSS filter.",
-  "action": {
-    "default_popup": "options.html"
-  },
+  "description": "Disables HDR for small images (like avatars) by applying a CSS filter.",
+  "options_page": "options.html",
   "permissions": ["storage"],
   "content_scripts": [
     {
