@@ -1,0 +1,15 @@
+{
+  "extensionName": { "message": "HDR 头像屏蔽器" },
+  "extensionDescription": { "message": "禁用小尺寸图片（通常是头像）上的 HDR 效果。" },
+  "optionsTitle": { "message": "HDR 头像屏蔽器设置" },
+  "sizeThresholdLabel": { "message": "为小于此尺寸的图片禁用 HDR (像素):" },
+  "ignoreDomainsLabel": { "message": "忽略域名" },
+  "ignoreDomainsDescription": { "message": "以英文逗号分隔。支持 * 通配符和 IP CIDR 表示法。" },
+  "blackoutLabel": { "message": "涂黑模式" },
+  "blackoutDescription": { "message": "将 HDR 头像直接涂抹为纯黑色，而不是修正它。" },
+  "saveButton": { "message": "保存" },
+  "refreshButton": { "message": "刷新页面" },
+  "optionsSaved": { "message": "设置已保存。" },
+  "footerDescription": { "message": "此 Chrome 扩展完全免费，没有广告。" },
+  "moreAppsLink": { "message": "作者的更多 App" }
+}
