@@ -16,6 +16,8 @@ function setLocaleText() {
     const i18nMap = {
         'optionsTitle': 'optionsTitle',
         'sizeThresholdLabel': 'sizeThresholdLabel',
+        'ignoreDomainsLabel': 'ignoreDomainsLabel',
+        'ignoreDomainsDescription': 'ignoreDomainsDescription',
         'blackoutLabel': 'blackoutLabel',
         'blackoutDescription': 'blackoutDescription',
         'footerDescription': 'footerDescription',
@@ -35,11 +37,17 @@ function setLocaleText() {
 // Saves options to chrome.storage
 function saveOptions() {
   const size = document.getElementById('size').value;
+  const ignoreList = document.getElementById('ignoreList').value
+    .split(',')
+    .map(s => s.trim())
+    .filter(Boolean)
+    .join(',');
   const blackout = document.getElementById('blackout').checked;
 
   chrome.storage.sync.set(
     {
       sizeThreshold: size,
+      ignoreList: ignoreList,
       blackout: blackout,
     },
     () => {
@@ -58,11 +66,13 @@ function saveOptions() {
 function restoreOptions() {
   const defaults = {
     sizeThreshold: 200,
+    ignoreList: 'localhost,127.0.0.1,192.168.0.0/16,10.0.0.0/8,*.local',
     blackout: false,
   };
 
   chrome.storage.sync.get(defaults, (items) => {
     document.getElementById('size').value = items.sizeThreshold;
+    document.getElementById('ignoreList').value = items.ignoreList;
     document.getElementById('blackout').checked = items.blackout;
   });
 }
@@ -74,5 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const debouncedSave = debounce(saveOptions, 500);
 
     document.getElementById('size').addEventListener('input', debouncedSave);
-    document.getElementById('blackout').addEventListener('change', saveOptions);
+    document.getElementById('ignoreList').addEventListener('input', debouncedSave);
+    document.getElementById('blackout').addEventListener('change', saveOptions); // No debounce needed for checkbox
 });

@@ -3,8 +3,12 @@
   "extensionDescription": { "message": "Disables the HDR effect on small images, which are often avatars." },
   "optionsTitle": { "message": "HDR Avatar Blocker Settings" },
   "sizeThresholdLabel": { "message": "Disable HDR for images smaller than (px):" },
+  "ignoreDomainsLabel": { "message": "Ignored Domains" },
+  "ignoreDomainsDescription": { "message": "Separated by commas. Supports wildcards (*) and IP CIDR notation." },
   "blackoutLabel": { "message": "Blackout" },
   "blackoutDescription": { "message": "Completely black out HDR avatars instead of correcting them." },
+  "saveButton": { "message": "Save" },
+  "refreshButton": { "message": "Refresh Page" },
   "optionsSaved": { "message": "Options saved." },
   "footerDescription": { "message": "This Chrome extension is completely free and has no ads." },
   "moreAppsLink": { "message": "More apps by the author" }
