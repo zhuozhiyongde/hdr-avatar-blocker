@@ -1,9 +1,11 @@
 {
   "manifest_version": 3,
-  "name": "__MSG_extensionName__",
-  "version": "1.1",
-  "description": "__MSG_extensionDescription__",
-  "default_locale": "en",
+  "name": "HDR Avatar Blocker",
+  "version": "1.0",
+  "description": "Disables HDR for small images (like avatars) by applying a CSS filter.",
+    "action": {
+    "default_popup": "options.html"
+  },
   "permissions": ["storage"],
   "content_scripts": [
     {
@@ -11,11 +13,5 @@
       "js": ["content.js"],
       "run_at": "document_start"
     }
-  ],
-  "options_page": "options.html",
-  "action": {
-    "default_popup": "options.html",
-    "default_title": "__MSG_extensionName__"
-  },
-  "icons": {}
+  ]
 }

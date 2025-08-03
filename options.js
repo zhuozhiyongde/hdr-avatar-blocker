@@ -1,59 +1,12 @@
-// Debounce function to limit the rate at which a function gets called.
-function debounce(func, wait) {
-  let timeout;
-  return function executedFunction(...args) {
-    const later = () => {
-      clearTimeout(timeout);
-      func(...args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
-}
-
-// Internationalize the UI
-function setLocaleText() {
-    const i18nMap = {
-        'optionsTitle': 'optionsTitle',
-        'sizeThresholdLabel': 'sizeThresholdLabel',
-        'ignoreDomainsLabel': 'ignoreDomainsLabel',
-        'ignoreDomainsDescription': 'ignoreDomainsDescription',
-        'blackoutLabel': 'blackoutLabel',
-        'blackoutDescription': 'blackoutDescription',
-        'footerDescription': 'footerDescription',
-        'moreAppsLink': 'moreAppsLink'
-    };
-
-    document.title = chrome.i18n.getMessage('optionsTitle');
-
-    for (const id in i18nMap) {
-        const element = document.getElementById(id);
-        if (element) {
-            element.textContent = chrome.i18n.getMessage(i18nMap[id]);
-        }
-    }
-}
-
 // Saves options to chrome.storage
 function saveOptions() {
   const size = document.getElementById('size').value;
-  const ignoreList = document.getElementById('ignoreList').value
-    .split(',')
-    .map(s => s.trim())
-    .filter(Boolean)
-    .join(',');
-  const blackout = document.getElementById('blackout').checked;
-
   chrome.storage.sync.set(
-    {
-      sizeThreshold: size,
-      ignoreList: ignoreList,
-      blackout: blackout,
-    },
+    { sizeThreshold: size },
     () => {
       // Update status to let user know options were saved.
       const status = document.getElementById('status');
-      status.textContent = chrome.i18n.getMessage('optionsSaved');
+      status.textContent = 'Options saved.';
       status.style.opacity = 1;
       setTimeout(() => {
         status.style.opacity = 0;
@@ -62,28 +15,17 @@ function saveOptions() {
   );
 }
 
-// Restores options using the preferences stored in chrome.storage.
+// Restores select box and checkbox state using the preferences
+// stored in chrome.storage.
 function restoreOptions() {
-  const defaults = {
-    sizeThreshold: 200,
-    ignoreList: 'localhost,127.0.0.1,192.168.0.0/16,10.0.0.0/8,*.local',
-    blackout: false,
-  };
-
-  chrome.storage.sync.get(defaults, (items) => {
-    document.getElementById('size').value = items.sizeThreshold;
-    document.getElementById('ignoreList').value = items.ignoreList;
-    document.getElementById('blackout').checked = items.blackout;
-  });
+  // Use default value sizeThreshold = 200.
+  chrome.storage.sync.get(
+    { sizeThreshold: 200 },
+    (items) => {
+      document.getElementById('size').value = items.sizeThreshold;
+    }
+  );
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    setLocaleText();
-    restoreOptions();
-
-    const debouncedSave = debounce(saveOptions, 500);
-
-    document.getElementById('size').addEventListener('input', debouncedSave);
-    document.getElementById('ignoreList').addEventListener('input', debouncedSave);
-    document.getElementById('blackout').addEventListener('change', saveOptions); // No debounce needed for checkbox
-});
+document.addEventListener('DOMContentLoaded', restoreOptions);
+document.getElementById('save').addEventListener('click', saveOptions);

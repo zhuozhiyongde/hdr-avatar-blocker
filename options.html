@@ -1,133 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title></title>
+  <title>HDR Avatar Blocker Options</title>
   <style>
-    :root {
-      --field-background: #f1f3f4;
-      --text-color: #202124;
-      --label-color: #5f6368;
-      --border-color: #dadce0;
-      --link-color: #1a73e8;
-      --success-color: #1e8e3e;
-    }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      padding: 20px;
-      min-width: 400px;
-      background-color: #fff;
-      color: var(--text-color);
+      font-family: sans-serif;
+      padding: 10px 20px;
+      min-width: 300px;
     }
-    h1 {
-      font-size: 20px;
-      margin-top: 0;
-      margin-bottom: 20px;
-      color: var(--text-color);
-    }
-    .option-group {
-      margin-bottom: 20px;
+    .option {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
     }
     label {
-      display: block;
-      font-weight: 500;
-      margin-bottom: 5px;
-      color: var(--label-color);
-      font-size: 14px;
-    }
-    .description {
-        font-size: 12px;
-        color: var(--label-color);
-        margin-bottom: 8px;
-    }
-    input[type="number"],
-    textarea {
-      width: 100%;
-      padding: 8px;
-      border: 1px solid var(--border-color);
-      border-radius: 4px;
-      background-color: var(--field-background);
-      box-sizing: border-box;
-      font-size: 14px;
+      margin-right: 10px;
     }
     input[type="number"] {
-        width: 100px;
-    }
-    textarea {
-        min-height: 80px;
-        resize: vertical;
-    }
-    .checkbox-option {
-        display: flex;
-        align-items: center;
-        margin-top: 10px;
-    }
-    .checkbox-option input {
-        margin-right: 10px;
-        width: 16px;
-        height: 16px;
-    }
-    .checkbox-option .label-group {
-        display: flex;
-        flex-direction: column;
+      width: 60px;
     }
     #status {
-      margin-top: 10px;
-      color: var(--success-color);
+      margin-left: 15px;
+      color: green;
       font-weight: bold;
       opacity: 0;
       transition: opacity 0.5s;
-      font-size: 13px;
-    }
-    footer {
-        border-top: 1px solid var(--border-color);
-        padding-top: 15px;
-        margin-top: 25px;
-        font-size: 12px;
-        color: var(--label-color);
-    }
-    footer p {
-        margin: 0 0 10px 0;
-    }
-    footer a {
-        color: var(--link-color);
-        text-decoration: none;
-    }
-    footer a:hover {
-        text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <h1 id="optionsTitle"></h1>
-
-  <div class="option-group">
-    <label for="size" id="sizeThresholdLabel"></label>
+  <h1>HDR Avatar Blocker Settings</h1>
+  <div class="option">
+    <label for="size">Disable HDR for images smaller than (px):</label>
     <input type="number" id="size" name="size" min="0" step="10">
   </div>
-
-  <div class="option-group">
-    <label for="ignoreList" id="ignoreDomainsLabel"></label>
-    <p class="description" id="ignoreDomainsDescription"></p>
-    <textarea id="ignoreList"></textarea>
-  </div>
-
-  <div class="option-group">
-     <div class="checkbox-option">
-        <input type="checkbox" id="blackout">
-        <div class="label-group">
-            <label for="blackout" id="blackoutLabel"></label>
-            <p class="description" id="blackoutDescription"></p>
-        </div>
-    </div>
-  </div>
-
-  <div id="status"></div>
-
-  <footer>
-    <p id="footerDescription"></p>
-    <a id="moreAppsLink" href="https://play.google.com/store/apps/dev?id=4678881964570346633" target="_blank"></a>
-  </footer>
+  <button id="save">Save</button>
+  <span id="status"></span>
 
   <script src="options.js"></script>
 </body>
